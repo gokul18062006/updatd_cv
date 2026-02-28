@@ -35,10 +35,6 @@ export default function Navbar() {
             transition={{ duration: 0.6, delay: 0.2 }}
         >
             <div className="navbar-inner">
-                <a href="#" className="navbar-logo">
-                    &lt;GP /&gt;
-                </a>
-
                 <ul className={`navbar-links ${mobileOpen ? 'open' : ''}`}>
                     {navLinks.map((link) => (
                         <li key={link.href}>

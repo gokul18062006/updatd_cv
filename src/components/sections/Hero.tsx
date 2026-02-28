@@ -99,7 +99,8 @@ export default function Hero() {
                     <a
                         href="/resume.pdf"
                         className="btn-outline"
-                        download="Gokul_P_Resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
                     >
                         📄 Download Resume
                     </a>
