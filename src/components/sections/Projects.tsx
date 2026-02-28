@@ -4,6 +4,7 @@ const projects = [
     {
         icon: '🔐',
         title: 'Legal Document Analyzer',
+        image: '/project-legal.png',
         description:
             'AI-based system to summarize legal documents, extract clauses, and perform named entity recognition using NLP and LLMs. Improved document understanding and reduced manual review effort through automated text analysis.',
         tech: ['Python', 'NLP', 'FastAPI', 'Pandas', 'React', 'TypeScript'],
@@ -13,6 +14,7 @@ const projects = [
     {
         icon: '🤖',
         title: 'AI Code Review Agent',
+        image: '/project-codereview.png',
         description:
             'AI-powered code review tool supporting 50+ programming languages with smart language detection, security analysis, complexity metrics, and auto-fix suggestions. Leverages Google Gemini for intelligent analysis with a clean dark UI.',
         tech: ['React', 'TypeScript', 'FastAPI', 'Python', 'Gemini AI', 'Tailwind CSS'],
@@ -22,6 +24,7 @@ const projects = [
     {
         icon: '🛍️',
         title: 'Artisan Connect',
+        image: '/project-artisan.png',
         description:
             'Marketplace platform connecting artisans and customers with secure authentication and product listings. Designed to support small-scale artisans by enabling digital product visibility and wider customer reach.',
         tech: ['React', 'JavaScript', 'Tailwind CSS', 'Next.js', 'MongoDB'],
@@ -31,6 +34,7 @@ const projects = [
     {
         icon: '🎓',
         title: 'Student Connect',
+        image: '/project-student.png',
         description:
             'Student collaboration hub enabling peer-to-peer connections, project collaboration, and knowledge sharing. Built to foster academic community engagement and streamline student interactions.',
         tech: ['JavaScript', 'React', 'Node.js'],
@@ -40,6 +44,7 @@ const projects = [
     {
         icon: '📊',
         title: 'Data Analytics Dashboards',
+        image: '/project-dashboard.png',
         description:
             'Interactive dashboards for business insights with KPIs, trends, and visual analytics. Built with Power BI and Python to transform raw data into compelling visual stories for stakeholder decision-making.',
         tech: ['Power BI', 'Python', 'Excel', 'Data Visualization'],
@@ -99,13 +104,12 @@ export default function Projects() {
                                 borderTopColor: project.color,
                             }}
                         >
-                            <div
-                                className="project-icon"
-                                style={{
-                                    background: `linear-gradient(135deg, ${project.color}20, ${project.color}10)`,
-                                }}
-                            >
-                                {project.icon}
+                            <div className="project-image-wrapper">
+                                <img
+                                    src={project.image}
+                                    alt={project.title}
+                                    className="project-image"
+                                />
                             </div>
                             <h3 className="project-title">{project.title}</h3>
                             <p className="project-desc">{project.description}</p>
