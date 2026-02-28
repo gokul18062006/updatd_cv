@@ -64,6 +64,13 @@ export default function About() {
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ duration: 0.6 }}
                     >
+                        <div className="profile-photo-wrapper">
+                            <img
+                                src="/profile.jpg"
+                                alt="Gokul P"
+                                className="profile-photo"
+                            />
+                        </div>
                         <p>
                             I'm a B.Tech student specializing in <strong>Artificial Intelligence and Data Science</strong> at Karunya Institute of Technology and Sciences, Coimbatore. With a
                             strong foundation in machine learning, deep learning, and NLP, I build intelligent applications that create real impact.

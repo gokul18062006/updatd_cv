@@ -96,6 +96,13 @@ export default function Hero() {
                     }}>
                         🚀 View Projects
                     </a>
+                    <a
+                        href="/resume.pdf"
+                        className="btn-outline"
+                        download="Gokul_P_Resume.pdf"
+                    >
+                        📄 Download Resume
+                    </a>
                     <a href="#contact" className="btn-outline" onClick={(e) => {
                         e.preventDefault();
                         document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -105,10 +112,6 @@ export default function Hero() {
                 </motion.div>
             </motion.div>
 
-            <div className="hero-scroll-indicator">
-                <div className="mouse" />
-                <span>SCROLL</span>
-            </div>
         </section>
     );
 }
