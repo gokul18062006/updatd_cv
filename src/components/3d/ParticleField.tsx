@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -8,10 +8,9 @@ export default function ParticleField() {
     const meshRef = useRef<THREE.Points>(null);
     const mouseRef = useRef({ x: 0, y: 0 });
 
-    const [positions, colors, sizes] = useMemo(() => {
+    const [positions, colors] = useMemo(() => {
         const pos = new Float32Array(PARTICLE_COUNT * 3);
         const col = new Float32Array(PARTICLE_COUNT * 3);
-        const siz = new Float32Array(PARTICLE_COUNT);
 
         for (let i = 0; i < PARTICLE_COUNT; i++) {
             pos[i * 3] = (Math.random() - 0.5) * 30;
@@ -32,12 +31,23 @@ export default function ParticleField() {
                 col[i * 3 + 1] = 0.714;
                 col[i * 3 + 2] = 0.831;
             }
-
-            siz[i] = Math.random() * 3 + 1;
         }
 
-        return [pos, col, siz];
+        return [pos, col];
     }, []);
+
+    const geometry = useMemo(() => {
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+        return geo;
+    }, [positions, colors]);
+
+    useEffect(() => {
+        return () => {
+            geometry.dispose();
+        };
+    }, [geometry]);
 
     useFrame(({ clock, pointer }) => {
         if (!meshRef.current) return;
@@ -60,27 +70,7 @@ export default function ParticleField() {
     });
 
     return (
-        <points ref={meshRef}>
-            <bufferGeometry>
-                <bufferAttribute
-                    attach="attributes-position"
-                    count={PARTICLE_COUNT}
-                    array={positions}
-                    itemSize={3}
-                />
-                <bufferAttribute
-                    attach="attributes-color"
-                    count={PARTICLE_COUNT}
-                    array={colors}
-                    itemSize={3}
-                />
-                <bufferAttribute
-                    attach="attributes-size"
-                    count={PARTICLE_COUNT}
-                    array={sizes}
-                    itemSize={1}
-                />
-            </bufferGeometry>
+        <points ref={meshRef} geometry={geometry}>
             <pointsMaterial
                 size={0.06}
                 vertexColors
