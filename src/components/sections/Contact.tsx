@@ -1,4 +1,6 @@
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const contactLinks = [
     {
@@ -40,6 +42,50 @@ const itemVariants = {
 };
 
 export default function Contact() {
+    const formRef = useRef<HTMLFormElement>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+    const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        if (!formRef.current) return;
+
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+
+        // Note: You need to set these environment variables in a .env file
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        if (!serviceId || !templateId || !publicKey) {
+            console.error('EmailJS environment variables are missing.');
+            alert('Please configure EmailJS in the .env file.');
+            setIsSubmitting(false);
+            return;
+        }
+
+        emailjs
+            .sendForm(serviceId, templateId, formRef.current, {
+                publicKey: publicKey,
+            })
+            .then(
+                () => {
+                    setIsSubmitting(false);
+                    setSubmitStatus('success');
+                    formRef.current?.reset();
+                    setTimeout(() => setSubmitStatus('idle'), 5000);
+                },
+                (error: any) => {
+                    console.error('FAILED...', error.text);
+                    setIsSubmitting(false);
+                    setSubmitStatus('error');
+                    setTimeout(() => setSubmitStatus('idle'), 5000);
+                },
+            );
+    };
+
     return (
         <section className="section" id="contact">
             <div className="container">
@@ -89,21 +135,20 @@ export default function Contact() {
                     </motion.div>
 
                     <motion.form
+                        ref={formRef}
                         className="contact-form glass-card"
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: '-50px' }}
                         transition={{ duration: 0.6 }}
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            alert('Thank you for your message! I\'ll get back to you soon.');
-                        }}
+                        onSubmit={sendEmail}
                     >
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input
                                 type="text"
                                 id="name"
+                                name="name"
                                 className="form-input"
                                 placeholder="Your name"
                                 required
@@ -114,6 +159,7 @@ export default function Contact() {
                             <input
                                 type="email"
                                 id="email"
+                                name="email"
                                 className="form-input"
                                 placeholder="your@email.com"
                                 required
@@ -123,13 +169,25 @@ export default function Contact() {
                             <label htmlFor="message">Message</label>
                             <textarea
                                 id="message"
+                                name="message"
                                 className="form-textarea"
                                 placeholder="Tell me about your project or idea..."
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
-                            ✉️ Send Message
+                        <button
+                            type="submit"
+                            className="btn-primary"
+                            style={{
+                                width: '100%',
+                                justifyContent: 'center',
+                                opacity: isSubmitting ? 0.7 : 1,
+                                cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                                backgroundColor: submitStatus === 'success' ? '#10b981' : submitStatus === 'error' ? '#ef4444' : ''
+                            }}
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Sending...' : submitStatus === 'success' ? '✅ Sent Successfully!' : submitStatus === 'error' ? '❌ Failed to Send' : '✉️ Send Message'}
                         </button>
                     </motion.form>
                 </div>
