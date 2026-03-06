@@ -73,7 +73,7 @@ export default function About() {
                         </div>
                         <p>
                             I'm a B.Tech student specializing in <strong>Artificial Intelligence and Data Science</strong> at Karunya Institute of Technology and Sciences, Coimbatore. With a
-                            strong foundation in machine learning, deep learning, and NLP, I build intelligent applications that create real impact.
+                            strong foundation in machine learning and deep learning, I build intelligent applications that create real impact.
                         </p>
                         <p>
                             From analyzing complex datasets with Power BI to developing full-stack AI-driven platforms,
