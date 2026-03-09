@@ -2,6 +2,9 @@ import { Canvas } from '@react-three/fiber';
 import { Preload } from '@react-three/drei';
 import ParticleField from './ParticleField';
 import FloatingGeometry from './FloatingGeometry';
+import DNAHelix from './DNAHelix';
+import OrbitingRings from './OrbitingRings';
+import NeuralNetwork from './NeuralNetwork';
 
 export default function Scene() {
     return (
@@ -17,6 +20,9 @@ export default function Scene() {
                 <pointLight position={[-10, -10, 5]} intensity={0.3} color="#06b6d4" />
                 <ParticleField />
                 <FloatingGeometry />
+                <DNAHelix />
+                <OrbitingRings />
+                <NeuralNetwork />
                 <Preload all />
             </Canvas>
         </div>
