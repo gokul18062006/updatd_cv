@@ -8,10 +8,14 @@ import Projects from './components/sections/Projects';
 import Certifications from './components/sections/Certifications';
 import Contact from './components/sections/Contact';
 import Footer from './components/sections/Footer';
+import MouseGlow from './components/sections/MouseGlow';
+import ScrollProgress from './components/sections/ScrollProgress';
 
 function App() {
   return (
     <>
+      <ScrollProgress />
+      <MouseGlow />
       <Scene />
       <div className="content-wrapper">
         <Navbar />

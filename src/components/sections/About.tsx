@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const education = [
     {
@@ -22,9 +23,9 @@ const education = [
 ];
 
 const stats = [
-    { number: '24+', label: 'Repositories' },
-    { number: '2', label: 'Internships' },
-    { number: '4', label: 'Certifications' },
+    { number: 24, suffix: '+', label: 'Repositories' },
+    { number: 2, suffix: '', label: 'Internships' },
+    { number: 4, suffix: '', label: 'Certifications' },
 ];
 
 const containerVariants = {
@@ -38,6 +39,37 @@ const itemVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
+
+function AnimatedCounter({ target, suffix }: { target: number; suffix: string }) {
+    const [count, setCount] = useState(0);
+    const ref = useRef<HTMLDivElement>(null);
+    const isInView = useInView(ref, { once: true, margin: '-50px' });
+
+    useEffect(() => {
+        if (!isInView) return;
+
+        let start = 0;
+        const duration = 1500;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+            start += increment;
+            if (start >= target) {
+                setCount(target);
+                clearInterval(timer);
+            } else {
+                setCount(Math.floor(start));
+            }
+        }, 16);
+
+        return () => clearInterval(timer);
+    }, [isInView, target]);
+
+    return (
+        <div className="stat-number" ref={ref}>
+            {count}{suffix}
+        </div>
+    );
+}
 
 export default function About() {
     return (
@@ -88,7 +120,7 @@ export default function About() {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.98 }}
                                 >
-                                    <div className="stat-number">{stat.number}</div>
+                                    <AnimatedCounter target={stat.number} suffix={stat.suffix} />
                                     <div className="stat-label">{stat.label}</div>
                                 </motion.div>
                             ))}

@@ -1271,3 +1271,189 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========== Mouse Glow ========== */
+.mouse-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      rgba(139, 92, 246, 0.08) 0%,
+      rgba(59, 130, 246, 0.04) 40%,
+      transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.4s ease;
+  mix-blend-mode: screen;
+}
+
+/* ========== Scroll Progress ========== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform-origin: 0%;
+  z-index: 10001;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* ========== Skill Filter Tabs ========== */
+.skill-filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.skill-filter-tab {
+  position: relative;
+  padding: 10px 22px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: 50px;
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+}
+
+.skill-filter-tab:hover {
+  border-color: var(--border-glow);
+  color: var(--text-primary);
+  background: var(--bg-glass-hover);
+}
+
+.skill-filter-tab.active {
+  color: #fff;
+  border-color: var(--accent-purple);
+  background: rgba(139, 92, 246, 0.2);
+}
+
+.skill-filter-indicator {
+  position: absolute;
+  inset: 0;
+  background: rgba(139, 92, 246, 0.15);
+  border-radius: 50px;
+  z-index: -1;
+}
+
+/* ========== Tilt Card ========== */
+.tilt-card {
+  transition: transform 0.15s ease-out, box-shadow var(--transition-normal), background var(--transition-normal), border-color var(--transition-normal);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.tilt-card>*:not(.tilt-spotlight) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ========== Timeline Expand/Collapse ========== */
+.timeline-content {
+  cursor: pointer;
+  user-select: none;
+}
+
+.timeline-content.expanded {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-glass-hover);
+}
+
+.timeline-expand-hint {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.timeline-content:hover .timeline-expand-hint {
+  opacity: 1;
+  color: var(--accent-purple);
+}
+
+.timeline-highlights {
+  overflow: hidden;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-glass);
+}
+
+.highlights-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-purple);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.highlights-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.highlights-list li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.highlights-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+/* ========== Responsive for New Features ========== */
+@media (max-width: 768px) {
+  .mouse-glow {
+    display: none;
+  }
+
+  .skill-filter-tabs {
+    gap: 6px;
+  }
+
+  .skill-filter-tab {
+    padding: 8px 16px;
+    font-size: 0.78rem;
+  }
+
+  .timeline-expand-hint {
+    text-align: left;
+  }
+}

@@ -1,37 +1,46 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const skillCategories = [
     {
         title: 'Programming',
         icon: '💻',
+        color: 'linear-gradient(135deg, #3b82f6, #6366f1)',
         skills: ['Python', 'Java', 'SQL', 'TypeScript', 'JavaScript'],
     },
     {
         title: 'Databases',
         icon: '🗄️',
+        color: 'linear-gradient(135deg, #10b981, #059669)',
         skills: ['PostgreSQL', 'MongoDB'],
     },
     {
         title: 'Tools & Platforms',
         icon: '🛠️',
+        color: 'linear-gradient(135deg, #f59e0b, #d97706)',
         skills: ['Power BI', 'Tableau', 'Git', 'VS Code', 'Postman'],
     },
     {
         title: 'AI / ML Concepts',
         icon: '🧠',
+        color: 'linear-gradient(135deg, #ec4899, #a855f7)',
         skills: ['CNNs', 'LLMs', 'RAG', 'NLP', 'Deep Learning', 'Data Analysis'],
     },
     {
         title: 'Frameworks',
         icon: '⚡',
+        color: 'linear-gradient(135deg, #eab308, #f97316)',
         skills: ['React', 'Next.js', 'FastAPI', 'Tailwind CSS', 'Bootstrap', 'LangChain'],
     },
     {
         title: 'Soft Skills',
         icon: '🤝',
+        color: 'linear-gradient(135deg, #06b6d4, #0ea5e9)',
         skills: ['Communication', 'Problem Solving', 'Team Collaboration', 'Leadership'],
     },
 ];
+
+const filterTabs = ['All', ...skillCategories.map((c) => c.title)];
 
 const containerVariants = {
     hidden: {},
@@ -48,6 +57,12 @@ const cardVariants = {
         scale: 1,
         transition: { duration: 0.5 },
     },
+    exit: {
+        opacity: 0,
+        scale: 0.9,
+        y: 20,
+        transition: { duration: 0.3 },
+    },
 };
 
 const pillVariants = {
@@ -56,6 +71,13 @@ const pillVariants = {
 };
 
 export default function Skills() {
+    const [activeFilter, setActiveFilter] = useState('All');
+
+    const filteredCategories =
+        activeFilter === 'All'
+            ? skillCategories
+            : skillCategories.filter((c) => c.title === activeFilter);
+
     return (
         <section className="section" id="skills">
             <div className="container">
@@ -72,6 +94,26 @@ export default function Skills() {
                     </h2>
                 </motion.div>
 
+                {/* Filter Tabs */}
+                <div className="skill-filter-tabs">
+                    {filterTabs.map((tab) => (
+                        <button
+                            key={tab}
+                            className={`skill-filter-tab ${activeFilter === tab ? 'active' : ''}`}
+                            onClick={() => setActiveFilter(tab)}
+                        >
+                            {tab}
+                            {activeFilter === tab && (
+                                <motion.div
+                                    className="skill-filter-indicator"
+                                    layoutId="skillFilterIndicator"
+                                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                        </button>
+                    ))}
+                </div>
+
                 <motion.div
                     className="skills-grid"
                     variants={containerVariants}
@@ -79,36 +121,41 @@ export default function Skills() {
                     whileInView="visible"
                     viewport={{ once: true, margin: '-50px' }}
                 >
-                    {skillCategories.map((category) => (
-                        <motion.div
-                            className="skill-category"
-                            key={category.title}
-                            variants={cardVariants}
-                        >
-                            <div className="skill-category-header">
-                                <div className="skill-category-icon">{category.icon}</div>
-                                <h3 className="skill-category-title">{category.title}</h3>
-                            </div>
+                    <AnimatePresence mode="popLayout">
+                        {filteredCategories.map((category) => (
                             <motion.div
-                                className="skill-items"
-                                variants={containerVariants}
+                                className="skill-category"
+                                key={category.title}
+                                variants={cardVariants}
                                 initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true }}
+                                animate="visible"
+                                exit="exit"
+                                layout
                             >
-                                {category.skills.map((skill) => (
-                                    <motion.span
-                                        className="skill-pill"
-                                        key={skill}
-                                        variants={pillVariants}
-                                        whileHover={{ scale: 1.08, y: -3 }}
-                                    >
-                                        {skill}
-                                    </motion.span>
-                                ))}
+                                <div className="skill-category-header">
+                                    <div className="skill-category-icon" style={{ background: category.color }}>{category.icon}</div>
+                                    <h3 className="skill-category-title">{category.title}</h3>
+                                </div>
+                                <motion.div
+                                    className="skill-items"
+                                    variants={containerVariants}
+                                    initial="hidden"
+                                    animate="visible"
+                                >
+                                    {category.skills.map((skill) => (
+                                        <motion.span
+                                            className="skill-pill"
+                                            key={skill}
+                                            variants={pillVariants}
+                                            whileHover={{ scale: 1.08, y: -3 }}
+                                        >
+                                            {skill}
+                                        </motion.span>
+                                    ))}
+                                </motion.div>
                             </motion.div>
-                        </motion.div>
-                    ))}
+                        ))}
+                    </AnimatePresence>
                 </motion.div>
             </div>
         </section>

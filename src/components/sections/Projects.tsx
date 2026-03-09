@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -70,6 +71,80 @@ const cardVariants = {
     },
 };
 
+function TiltCard({ project }: { project: typeof projects[0] }) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const spotlightRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const card = cardRef.current;
+        const spotlight = spotlightRef.current;
+        if (!card || !spotlight) return;
+
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        spotlight.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(139, 92, 246, 0.15), transparent 60%)`;
+        spotlight.style.opacity = '1';
+    };
+
+    const handleMouseLeave = () => {
+        const card = cardRef.current;
+        const spotlight = spotlightRef.current;
+        if (!card || !spotlight) return;
+
+        card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        spotlight.style.opacity = '0';
+    };
+
+    return (
+        <motion.div
+            className="project-card tilt-card"
+            ref={cardRef}
+            variants={cardVariants}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                borderTopColor: project.color,
+            }}
+        >
+            <div className="tilt-spotlight" ref={spotlightRef} />
+            <div className="project-image-wrapper">
+                <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-image"
+                />
+            </div>
+            <h3 className="project-title">{project.title}</h3>
+            <p className="project-desc">{project.description}</p>
+            <div className="project-tech">
+                {project.tech.map((t) => (
+                    <span className="tech-badge" key={t}>
+                        {t}
+                    </span>
+                ))}
+            </div>
+            <div className="project-links">
+                <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-link"
+                >
+                    ⭐ GitHub
+                </a>
+            </div>
+        </motion.div>
+    );
+}
+
 export default function Projects() {
     return (
         <section className="section" id="projects">
@@ -95,42 +170,7 @@ export default function Projects() {
                     viewport={{ once: true, margin: '-50px' }}
                 >
                     {projects.map((project) => (
-                        <motion.div
-                            className="project-card"
-                            key={project.title}
-                            variants={cardVariants}
-                            whileHover={{ y: -8, scale: 1.02 }}
-                            style={{
-                                borderTopColor: project.color,
-                            }}
-                        >
-                            <div className="project-image-wrapper">
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="project-image"
-                                />
-                            </div>
-                            <h3 className="project-title">{project.title}</h3>
-                            <p className="project-desc">{project.description}</p>
-                            <div className="project-tech">
-                                {project.tech.map((t) => (
-                                    <span className="tech-badge" key={t}>
-                                        {t}
-                                    </span>
-                                ))}
-                            </div>
-                            <div className="project-links">
-                                <a
-                                    href={project.github}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="project-link"
-                                >
-                                    ⭐ GitHub
-                                </a>
-                            </div>
-                        </motion.div>
+                        <TiltCard key={project.title} project={project} />
                     ))}
                 </motion.div>
             </div>
