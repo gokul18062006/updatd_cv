@@ -6,7 +6,7 @@ const skillCategories = [
         title: 'Programming',
         icon: '💻',
         color: 'linear-gradient(135deg, #3b82f6, #6366f1)',
-        skills: ['Python', 'Java', 'SQL', 'TypeScript', 'JavaScript'],
+        skills: ['Python', 'Java', 'SQL'],
     },
     {
         title: 'Databases',
@@ -18,25 +18,25 @@ const skillCategories = [
         title: 'Tools & Platforms',
         icon: '🛠️',
         color: 'linear-gradient(135deg, #f59e0b, #d97706)',
-        skills: ['Power BI', 'Tableau', 'Git', 'VS Code', 'Postman'],
+        skills: ['Git', 'GitHub', 'Docker', 'Power BI', 'Postman', 'VS Code'],
     },
     {
         title: 'AI / ML Concepts',
         icon: '🧠',
         color: 'linear-gradient(135deg, #ec4899, #a855f7)',
-        skills: ['CNNs', 'LLMs', 'RAG', 'NLP', 'Deep Learning', 'Data Analysis'],
+        skills: ['MCP', 'LLMs', 'LangChain', 'RAG', 'NLP'],
     },
     {
         title: 'Frameworks',
         icon: '⚡',
         color: 'linear-gradient(135deg, #eab308, #f97316)',
-        skills: ['React', 'Next.js', 'FastAPI', 'Tailwind CSS', 'Bootstrap', 'LangChain'],
+        skills: ['React.js', 'FastAPI'],
     },
     {
         title: 'Soft Skills',
         icon: '🤝',
         color: 'linear-gradient(135deg, #06b6d4, #0ea5e9)',
-        skills: ['Communication', 'Problem Solving', 'Team Collaboration', 'Leadership'],
+        skills: ['Problem Solving', 'Communication', 'Team Collaboration'],
     },
 ];
 

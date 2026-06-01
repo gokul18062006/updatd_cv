@@ -6,7 +6,7 @@ const education = [
         degree: 'B.Tech in Artificial Intelligence & Data Science',
         school: 'Karunya Institute of Technology and Sciences, Coimbatore',
         period: 'Aug 2023 – May 2027',
-        details: 'CGPA: 7.9',
+        details: 'CGPA: 8.0',
     },
     {
         degree: 'HSC (12th Grade)',
@@ -24,7 +24,7 @@ const education = [
 
 const stats = [
     { number: 24, suffix: '+', label: 'Repositories' },
-    { number: 2, suffix: '', label: 'Internships' },
+    { number: 1, suffix: '', label: 'Internship' },
     { number: 4, suffix: '', label: 'Certifications' },
 ];
 

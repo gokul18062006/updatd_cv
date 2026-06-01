@@ -36,8 +36,8 @@ interface Certification {
 
 const certifications: Certification[] = [
     {
-        icon: '📊',
-        title: 'Power BI Data Analyst',
+        icon: '🤖',
+        title: 'Microsoft 365 Copilot & Agent Admin Fundamentals',
         issuer: 'Microsoft Certified',
     },
     {
@@ -51,7 +51,7 @@ const certifications: Certification[] = [
         issuer: 'Infosys Certified',
     },
     {
-        icon: '🤖',
+        icon: '🧠',
         title: 'Machine Learning',
         issuer: 'Infosys Certified',
     },

@@ -7,25 +7,12 @@ const experiences = [
         role: 'Data Science & Data Analysis Intern',
         period: 'Jun 2025 – Jul 2025',
         description:
-            'Analyzed and processed real-world datasets, created meaningful visualizations, and generated business insights using Python and Power BI to support data-driven decision-making.',
+            'Analyzed real-world datasets and developed interactive dashboards using Python and Power BI. Delivered actionable insights to support data-driven decision-making.',
         highlights: [
-            'Processed 10+ real-world business datasets',
-            'Created interactive dashboards with Power BI',
-            'Generated weekly analytics reports for stakeholders',
-            'Applied data cleaning pipelines using Pandas',
-        ],
-    },
-    {
-        company: 'YBI Foundation',
-        role: 'Data Science & Machine Learning Intern',
-        period: 'Jun 2024 – Jul 2024',
-        description:
-            'Worked on building predictive machine learning models using Python and performed data cleaning, analysis, and visualization using Pandas to derive actionable insights from structured datasets.',
-        highlights: [
-            'Built predictive ML models with scikit-learn',
-            'Performed EDA on structured datasets',
-            'Created data visualizations with Matplotlib & Seaborn',
-            'Implemented feature engineering techniques',
+            'Analyzed real-world datasets and built interactive dashboards',
+            'Created visualizations with Python and Power BI',
+            'Delivered actionable insights for data-driven decisions',
+            'Applied data cleaning and processing pipelines',
         ],
     },
 ];

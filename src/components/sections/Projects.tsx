@@ -3,54 +3,34 @@ import { motion } from 'framer-motion';
 
 const projects = [
     {
-        icon: '🔐',
-        title: 'Legal Document Analyzer',
-        image: '/project-legal.png',
-        description:
-            'AI-based system to summarize legal documents, extract clauses, and perform named entity recognition using NLP and LLMs. Improved document understanding and reduced manual review effort through automated text analysis.',
-        tech: ['Python', 'NLP', 'FastAPI', 'Pandas', 'React', 'TypeScript'],
-        github: 'https://github.com/gokul18062006',
-        color: '#8b5cf6',
-    },
-    {
         icon: '🤖',
         title: 'AI Code Review Agent',
         image: '/project-codereview.png',
         description:
-            'AI-powered code review tool supporting 50+ programming languages with smart language detection, security analysis, complexity metrics, and auto-fix suggestions. Leverages Google Gemini for intelligent analysis with a clean dark UI.',
-        tech: ['React', 'TypeScript', 'FastAPI', 'Python', 'Gemini AI', 'Tailwind CSS'],
+            'AI-powered system to analyze source code and generate intelligent improvement suggestions. Uses LLM-based analysis to detect logical errors, inefficiencies, and poor coding practices with a modular, scalable architecture for multi-language evaluation.',
+        tech: ['Python', 'LangChain', 'LLMs', 'APIs'],
         github: 'https://github.com/gokul18062006/code_review_agent',
         color: '#10b981',
     },
     {
+        icon: '🔐',
+        title: 'Legal Document Analyzer',
+        image: '/project-legal.png',
+        description:
+            'AI-based application to summarize legal documents and extract key clauses using NLP. Implements automated summarization pipelines, Named Entity Recognition (NER), and backend APIs for real-time document processing.',
+        tech: ['Python', 'NLP', 'FastAPI', 'React', 'TypeScript', 'RAG', 'LLaMA'],
+        github: 'https://github.com/gokul18062006',
+        color: '#8b5cf6',
+    },
+    {
         icon: '🛍️',
-        title: 'Artisan Connect',
+        title: 'Artisan Connect Marketplace',
         image: '/project-artisan.png',
         description:
-            'Marketplace platform connecting artisans and customers with secure authentication and product listings. Designed to support small-scale artisans by enabling digital product visibility and wider customer reach.',
-        tech: ['React', 'JavaScript', 'Tailwind CSS', 'Next.js', 'MongoDB'],
+            'Full-stack marketplace platform connecting artisans with customers through digital storefronts. Implemented authentication, dynamic product listings, and responsive UI to help small-scale artisans reach wider audiences.',
+        tech: ['React', 'Next.js', 'JavaScript', 'Tailwind CSS', 'MongoDB'],
         github: 'https://github.com/gokul18062006',
         color: '#3b82f6',
-    },
-    {
-        icon: '🎓',
-        title: 'Student Connect',
-        image: '/project-student.png',
-        description:
-            'Student collaboration hub enabling peer-to-peer connections, project collaboration, and knowledge sharing. Built to foster academic community engagement and streamline student interactions.',
-        tech: ['JavaScript', 'React', 'Node.js'],
-        github: 'https://github.com/gokul18062006/student-connect',
-        color: '#f59e0b',
-    },
-    {
-        icon: '📊',
-        title: 'Data Analytics Dashboards',
-        image: '/project-dashboard.png',
-        description:
-            'Interactive dashboards for business insights with KPIs, trends, and visual analytics. Built with Power BI and Python to transform raw data into compelling visual stories for stakeholder decision-making.',
-        tech: ['Power BI', 'Python', 'Excel', 'Data Visualization'],
-        github: 'https://github.com/gokul18062006',
-        color: '#06b6d4',
     },
 ];
 
