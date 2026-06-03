@@ -54,17 +54,9 @@ export default function Contact() {
         setIsSubmitting(true);
         setSubmitStatus('idle');
 
-        // Note: You need to set these environment variables in a .env file
-        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-        if (!serviceId || !templateId || !publicKey) {
-            console.error('EmailJS environment variables are missing.');
-            alert('Please configure EmailJS in the .env file.');
-            setIsSubmitting(false);
-            return;
-        }
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_j47fldm';
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_s98akx4';
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '-n5-y17ELm1714VcT';
 
         emailjs
             .sendForm(serviceId, templateId, formRef.current, {
